@@ -17,6 +17,10 @@ public class Location {
     @UuidGenerator
     private String id;
 
+    private String name;
+    private String type;
+    private String dimension;
+
     public Location(String name, String type, String dimension) {
         //this.id = id;
         this.name = name;
@@ -24,9 +28,7 @@ public class Location {
         this.dimension = dimension;
     }
 
-    private String name;
-    private String type;
-    private String dimension;
+
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private Set<Character> residents;
