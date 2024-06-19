@@ -31,10 +31,8 @@ public class CharacterController {
     //Burda BaseResponse'a List<CharacterDto> verince artik bizim T tipimiz List<CharacterDto> oluyor.
     @GetMapping("/getAllCharacters")
     public BaseResponse<List<CharacterDto>> getAllCharacters() {
-        BaseResponse<List<CharacterDto>> response = new BaseResponse<>();
-        response.setResults(characterService.getAllCharacters());
-        response.setStatus(Status.SUCCESS);
-        return response;
+        return new BaseResponse<>(characterService.getAllCharacters());
+
     }
 
     @GetMapping("/characters/{id}")

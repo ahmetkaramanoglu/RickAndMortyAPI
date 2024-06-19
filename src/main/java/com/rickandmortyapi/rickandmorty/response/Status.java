@@ -1,14 +1,19 @@
 package com.rickandmortyapi.rickandmorty.response;
 
-public enum Status {
-    SUCCESS("202"),
-    ERROR("404");
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    private final String status;
-    Status(String status) {
-        this.status = status;
-    }
-    public String getStatus() {
-        return status;
-    }
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Status {
+
+    private boolean success;
+    private String errorDescription;
+    private String errorCode;
+
+
 }

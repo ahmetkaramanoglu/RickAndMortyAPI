@@ -13,8 +13,10 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestControllerAdvice
+@RestControllerAdvice //bu annotation ile herhangi bir exception firlatildiginda araya giriyorsun. Ve bu classin icindeki methodlari calistiriyorsun. AOP mantigi gibi.
 public class GeneralExceptionHandler {
+
+    //MethodArgumentNotValidException hatasi firlatildiginda bu method calisir.
     @NotNull
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
@@ -33,6 +35,8 @@ public class GeneralExceptionHandler {
 
     @ExceptionHandler(GeneralNotFoundException.class)
     public ResponseEntity<?> generalNotFoundExceptionHandler(GeneralNotFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+        //GeneralNotFountException classinin herhangi bir nesnesi firlatildiginda bu method araya girer ve exceptionu handle eder. Daha sonra status durumlari ve mesajlari ile birlikte response doner.
+        ExceptionResponse exceptionResponse = new ExceptionResponse(false, exception.getErrorDescription(),exception.getErrorCode());
+        return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
     }
 }

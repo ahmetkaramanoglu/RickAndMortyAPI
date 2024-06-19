@@ -10,12 +10,16 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class BaseResponse<T> {
 
     private Status status;
     private T results;
+
+    public BaseResponse( T results) {
+        this.status = new Status(true, null, null);
+        this.results = results;
+    }
 
 
 }
