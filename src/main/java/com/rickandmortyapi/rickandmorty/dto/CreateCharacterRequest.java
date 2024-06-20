@@ -7,10 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CharacterLocationDto {
+@NoArgsConstructor
+public class CreateCharacterRequest {
     private String name;
+    private String status;
+    private String species;
     private String type;
-    private String dimension;
+    private String gender;
+    private CharacterLocationDto location;
 }

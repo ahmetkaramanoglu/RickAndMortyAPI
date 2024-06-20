@@ -1,7 +1,10 @@
 package com.rickandmortyapi.rickandmorty.service;
 
 import com.rickandmortyapi.rickandmorty.dto.CharacterDto;
+import com.rickandmortyapi.rickandmorty.dto.CreateCharacterRequest;
 import com.rickandmortyapi.rickandmorty.dto.converter.CharacterDtoConverter;
+import com.rickandmortyapi.rickandmorty.dto.converter.LocationDtoConverter;
+import com.rickandmortyapi.rickandmorty.dto.converter.LocationDtoToLocationConverter;
 import com.rickandmortyapi.rickandmorty.exception.CharacterNotFoundException;
 import com.rickandmortyapi.rickandmorty.model.Character;
 import com.rickandmortyapi.rickandmorty.repository.CharacterRepository;
@@ -15,11 +18,13 @@ public class CharacterService {
 
     private final CharacterRepository characterRepository;
     private final CharacterDtoConverter characterDtoConverter;
+    private final LocationDtoToLocationConverter converter;
 
-    public CharacterService(CharacterRepository characterRepository, CharacterDtoConverter characterDtoConverter) {
+    public CharacterService(CharacterRepository characterRepository, CharacterDtoConverter characterDtoConverter, LocationDtoToLocationConverter converter) {
 
         this.characterRepository = characterRepository;
         this.characterDtoConverter = characterDtoConverter;
+        this.converter = converter;
     }
 
     public List<CharacterDto> getAllCharacters() {
@@ -35,5 +40,10 @@ public class CharacterService {
     public CharacterDto getCharacterById(String id){
         CharacterDto characterDto = characterDtoConverter.characterToCharacterDto(findById(id));
         return characterDto;
+    }
+
+    public CharacterDto createCharacter(CreateCharacterRequest createCharacterRequest) {
+        Character character = new Character(createCharacterRequest.getName(), createCharacterRequest.getStatus(), createCharacterRequest.getSpecies(), createCharacterRequest.getType(), createCharacterRequest.getGender(), converter.convert(createCharacterRequest.getLocation()));
+        return characterDtoConverter.characterToCharacterDto(characterRepository.save(character));
     }
 }

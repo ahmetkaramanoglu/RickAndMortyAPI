@@ -22,9 +22,13 @@ public class Character {
     private String type;
     private String gender;
 
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "location_id",nullable = false)
+    private Location location;
+
     //Burda builder design patterni kullanilabilir fakat 1 tane constructor oldugu icin kullanmadim.
     public Character(String name, String status, String species, String type, String gender, Location location) {
-        //this.id = id;
+
         this.name = name;
         this.status = status;
         this.species = species;
@@ -35,9 +39,8 @@ public class Character {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "location_id",nullable = false)
-    private Location location;
+
+
 
 
 }

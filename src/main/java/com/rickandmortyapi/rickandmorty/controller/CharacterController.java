@@ -1,14 +1,12 @@
 package com.rickandmortyapi.rickandmorty.controller;
 
 import com.rickandmortyapi.rickandmorty.dto.CharacterDto;
+import com.rickandmortyapi.rickandmorty.dto.CreateCharacterRequest;
 import com.rickandmortyapi.rickandmorty.response.BaseResponse;
 import com.rickandmortyapi.rickandmorty.response.Status;
 import com.rickandmortyapi.rickandmorty.service.CharacterService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -33,6 +31,11 @@ public class CharacterController {
     public BaseResponse<List<CharacterDto>> getAllCharacters() {
         return new BaseResponse<>(characterService.getAllCharacters());
 
+    }
+
+    @PostMapping("/character")
+    public ResponseEntity<CharacterDto> createCharacter(@RequestBody CreateCharacterRequest createCharacterRequest) {
+        return ResponseEntity.ok(characterService.createCharacter(createCharacterRequest));
     }
 
     @GetMapping("/characters/{id}")

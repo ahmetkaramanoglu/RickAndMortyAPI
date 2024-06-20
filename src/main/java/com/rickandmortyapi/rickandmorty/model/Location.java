@@ -1,5 +1,6 @@
 package com.rickandmortyapi.rickandmorty.model;
 
+import com.rickandmortyapi.rickandmorty.dto.CharacterDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,6 +33,7 @@ public class Location {
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     private Set<Character> residents;
+
 
 
 }
