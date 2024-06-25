@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-
 public class BaseResponse<T> {
 
     private Status status;

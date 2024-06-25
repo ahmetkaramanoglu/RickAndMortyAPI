@@ -31,7 +31,9 @@ public class RickandmortyApplication implements CommandLineRunner {
 		Character morty = new Character("Morty Smith", "Alive", "Human", "","Male",earth);
 		Character summer = new Character("Summer Smith", "Alive", "Human", "","Female",earth);
 		Character jerry = new Character("Jerry Smith", "Alive", "Human", "","Male",earth);
-		Set<Character> characters = Set.of(rick, morty, summer, jerry);
+		Character ahmet = new Character("AHMET Smith", "Alive", "Human", "","Male",earth);
+		Character omer = new Character("OMER Smith", "Alive", "Human", "","Male",earth);
+		Set<Character> characters = Set.of(rick, morty, summer, jerry, ahmet, omer);
 		//Character'e earth verince ve cascade  yapisi All oldugu icin arkada location tablosuna da insert yapilir. Bu yuzden location.setResidents(characters) yapmamiza gerek yok. DIYE DUSUNUYORUM.
 		System.out.println(rick.getId());
 		characterRepository.saveAll(characters);

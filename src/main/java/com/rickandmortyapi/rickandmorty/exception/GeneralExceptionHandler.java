@@ -20,9 +20,9 @@ public class GeneralExceptionHandler {
     @NotNull
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  @NotNull HttpHeaders headers,
-                                                                  @NotNull HttpStatus status,
-                                                                  @NotNull WebRequest request) {
+                                                                   HttpHeaders headers,
+                                                                   HttpStatus status,
+                                                                   WebRequest request) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach(error ->{
             String fieldName = ((FieldError) error).getField();
@@ -32,6 +32,13 @@ public class GeneralExceptionHandler {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> generalExceptionHandler(){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(false, "Beklenmedik bir hata olustu.","500");
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
     @ExceptionHandler(GeneralNotFoundException.class)
     public ResponseEntity<?> generalNotFoundExceptionHandler(GeneralNotFoundException exception) {

@@ -17,23 +17,16 @@ public class Location {
     @Id
     @UuidGenerator
     private String id;
-
     private String name;
     private String type;
     private String dimension;
 
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
+    private Set<Character> residents;
     public Location(String name, String type, String dimension) {
         //this.id = id;
         this.name = name;
         this.type = type;
         this.dimension = dimension;
     }
-
-
-
-    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
-    private Set<Character> residents;
-
-
-
 }

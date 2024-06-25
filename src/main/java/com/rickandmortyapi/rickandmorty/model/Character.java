@@ -36,11 +36,4 @@ public class Character {
         this.gender = gender;
         this.location = location;
     }
-
-
-
-
-
-
-
 }

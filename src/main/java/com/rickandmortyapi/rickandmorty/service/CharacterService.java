@@ -8,7 +8,13 @@ import com.rickandmortyapi.rickandmorty.dto.converter.LocationDtoToLocationConve
 import com.rickandmortyapi.rickandmorty.exception.CharacterNotFoundException;
 import com.rickandmortyapi.rickandmorty.model.Character;
 import com.rickandmortyapi.rickandmorty.repository.CharacterRepository;
+import com.rickandmortyapi.rickandmorty.request.CharacterRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,23 +33,33 @@ public class CharacterService {
         this.converter = converter;
     }
 
-    public List<CharacterDto> getAllCharacters() {
-        List<Character> characters = characterRepository.findAll();
+    public List<CharacterDto> getAllCharacters(int page,int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Character> characters = characterRepository.findAll(pageable);
         return characters.stream().map(characterDtoConverter::characterToCharacterDto).collect(Collectors.toList());
     }
 
     protected Character findById(String id){
-        Character character = characterRepository.findById(id).orElseThrow(() -> new CharacterNotFoundException("404", "Character could not find by id: " + id));
-        return character;
+        return characterRepository.findById(id).orElseThrow(() -> new CharacterNotFoundException("404", "Character could not find by id: " + id));
     }
 
     public CharacterDto getCharacterById(String id){
-        CharacterDto characterDto = characterDtoConverter.characterToCharacterDto(findById(id));
-        return characterDto;
+        return characterDtoConverter.characterToCharacterDto(findById(id));
     }
 
     public CharacterDto createCharacter(CreateCharacterRequest createCharacterRequest) {
         Character character = new Character(createCharacterRequest.getName(), createCharacterRequest.getStatus(), createCharacterRequest.getSpecies(), createCharacterRequest.getType(), createCharacterRequest.getGender(), converter.convert(createCharacterRequest.getLocation()));
+        return characterDtoConverter.characterToCharacterDto(characterRepository.save(character));
+    }
+
+    public CharacterDto updateCharacter(String id, CharacterRequest characterRequest) {
+        //Eger name vermezse o bad request'i nasil yakalayacaksin?
+        Character character = findById(id); //Eger id bulunamazsa exception firlatir.
+        character.setName(characterRequest.getName());
+        character.setStatus(characterRequest.getStatus());
+        character.setSpecies(characterRequest.getSpecies());
+        character.setType(characterRequest.getType());
+        character.setGender(characterRequest.getGender());
         return characterDtoConverter.characterToCharacterDto(characterRepository.save(character));
     }
 }
