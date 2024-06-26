@@ -1,9 +1,8 @@
 package com.rickandmortyapi.rickandmorty.service;
 
 import com.rickandmortyapi.rickandmorty.dto.CharacterDto;
-import com.rickandmortyapi.rickandmorty.dto.CreateCharacterRequest;
+import com.rickandmortyapi.rickandmorty.request.CreateCharacterRequest;
 import com.rickandmortyapi.rickandmorty.dto.converter.CharacterDtoConverter;
-import com.rickandmortyapi.rickandmorty.dto.converter.LocationDtoConverter;
 import com.rickandmortyapi.rickandmorty.dto.converter.LocationDtoToLocationConverter;
 import com.rickandmortyapi.rickandmorty.exception.CharacterNotFoundException;
 import com.rickandmortyapi.rickandmorty.model.Character;
@@ -12,8 +11,6 @@ import com.rickandmortyapi.rickandmorty.request.CharacterRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -53,7 +50,6 @@ public class CharacterService {
     }
 
     public CharacterDto updateCharacter(String id, CharacterRequest characterRequest) {
-        //Eger name vermezse o bad request'i nasil yakalayacaksin?
         Character character = findById(id); //Eger id bulunamazsa exception firlatir.
         character.setName(characterRequest.getName());
         character.setStatus(characterRequest.getStatus());

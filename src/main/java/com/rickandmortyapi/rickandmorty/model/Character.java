@@ -28,7 +28,6 @@ public class Character {
 
     //Burda builder design patterni kullanilabilir fakat 1 tane constructor oldugu icin kullanmadim.
     public Character(String name, String status, String species, String type, String gender, Location location) {
-
         this.name = name;
         this.status = status;
         this.species = species;

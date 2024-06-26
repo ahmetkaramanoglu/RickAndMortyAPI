@@ -1,5 +1,6 @@
-package com.rickandmortyapi.rickandmorty.dto;
+package com.rickandmortyapi.rickandmorty.request;
 
+import com.rickandmortyapi.rickandmorty.dto.CharacterLocationDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -20,9 +21,11 @@ public class CreateCharacterRequest {
     @NotBlank(message = "Durum bos birakilamaz.")
     private String status;
     private String species;
-    @NotNull
+    @NotNull(message = "Tur null olamaz.")
     private String type;
-    @NotNull
+
+    @NotNull(message = "Cinsiyet null olamaz.")
     private String gender;
+
     private CharacterLocationDto location;
 }

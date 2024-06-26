@@ -29,6 +29,7 @@ public class GeneralExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+        //ExceptionResponse exceptionResponse = new ExceptionResponse(false, "Validation Error", "400");
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
