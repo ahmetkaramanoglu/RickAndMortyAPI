@@ -27,5 +27,7 @@ public class CreateCharacterRequest {
     @NotNull(message = "Cinsiyet null olamaz.")
     private String gender;
 
-    private CharacterLocationDto location;
+    private String locationId;
+
+    //private CharacterLocationDto location;
 }

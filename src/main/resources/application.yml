@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: rickandmorty
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/ahmet
+    username: root
+    password:
+  jwt:
+    header: Authorization
+    key: aGHPR1U42sbzjef8SltVzJ7/aJkA5Y6OnUetlAEVaGLRIPxXeIeKL/o9CVWZ5Uj4Reoa8ug5wHJsrCEs/3gdKUKv8uwZf76cynqy0K7/lrxZLK6vJcs4PbN4KSTEWSK5pA8QFEY1/4kt4RWzu4h3iIKADuSQnrl2IM4cPhUCwBEWAKDlyGxU8XDehmegLi7tkLuRVv7vEhxVwhymvMiz2IeEzPtN7djaHNS3rO7eTlwCgGNA4ckSlkfqc16NmqA+4aoQUA/KvRypfAJkYmd3DYeEKKIDz70qwPk0CICK+RZt5N9eOw+0LE0J8cyznptI/0wGzV3fobd50XBqQsp7Ow==

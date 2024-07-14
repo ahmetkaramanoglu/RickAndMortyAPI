@@ -13,7 +13,13 @@ public class CharacterDtoConverter {
     }
 
     public CharacterDto characterToCharacterDto(Character from){
-        return new CharacterDto(from.getName(), from.getStatus(), from.getSpecies(), from.getType(), from.getGender(),characterLocationDtoConverter.locationToCharacterLocationDto(from.getLocation()));
+        return new CharacterDto(
+                from.getName(),
+                from.getStatus(),
+                from.getSpecies(),
+                from.getType(),
+                from.getGender(),
+                characterLocationDtoConverter.locationToCharacterLocationDto(from.getLocation()));
     }
 
 

@@ -6,11 +6,11 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Location {
@@ -22,7 +22,7 @@ public class Location {
     private String dimension;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
-    private Set<Character> residents;
+    private List<Character> residents;
     public Location(String name, String type, String dimension) {
         //this.id = id;
         this.name = name;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import io.jsonwebtoken.security.SignatureException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +40,14 @@ public class GeneralExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(false, "Beklenmedik bir hata olustu.","500");
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(SignatureException.class)
+    public ResponseEntity<?> signatureExceptionHandler(){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(false, "Token gecerli degil.","403");
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
 
+    }
+
+    //exception handler controlleri dinliyor. servlet seviyesinde dinleyenleri arastir.
 
     @ExceptionHandler(GeneralNotFoundException.class)
     public ResponseEntity<?> generalNotFoundExceptionHandler(GeneralNotFoundException exception) {

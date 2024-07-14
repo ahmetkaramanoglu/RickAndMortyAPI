@@ -7,8 +7,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Table(name = "Characters")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Character {
@@ -22,8 +21,8 @@ public class Character {
     private String type;
     private String gender;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "location_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "location_id")
     private Location location;
 
     //Burda builder design patterni kullanilabilir fakat 1 tane constructor oldugu icin kullanmadim.

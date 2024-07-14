@@ -1,13 +1,12 @@
 package com.rickandmortyapi.rickandmorty.controller;
 
 import com.rickandmortyapi.rickandmorty.dto.LocationDto;
+import com.rickandmortyapi.rickandmorty.response.BaseResponse;
 import com.rickandmortyapi.rickandmorty.service.LocationService;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -21,8 +20,9 @@ public class LocationController {
     }
 
     @GetMapping("/locations")
-    public Set<LocationDto> getAllLocations() {
-        return locationService.getAllLocations();
+    public BaseResponse<List<LocationDto>> getAllLocations(@RequestParam(name = "page",defaultValue = "0") int page,
+                                                           @RequestParam(name = "size",defaultValue = "2") int size) {
+        return new BaseResponse<>(locationService.getAllLocations(page, size));
     }
 
     @GetMapping("/locations/{id}")
